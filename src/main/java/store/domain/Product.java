@@ -22,11 +22,11 @@ public class Product {
         return String.format("%,d", amount);
     }
 
-    private String getFormattedOutput(){
+    public String getFormattedOutput(){
         if(productPromotion == null){
-         return String.format("-" + productName + " " + formatPrice(productPrice) +"원 "+ productQuantity +"개");
+         return String.format("- " + productName + " " + formatPrice(productPrice) +"원 "+ productQuantity +"개");
         }
-        return String.format("-" + productName + " " + formatPrice(productPrice) +"원 "+ productQuantity +"개 " + productPromotion);
+        return String.format("- " + productName + " " + formatPrice(productPrice) +"원 "+ productQuantity +"개 " + productPromotion);
     }
 
 }
