@@ -5,7 +5,6 @@ import store.domain.Product;
 import store.domain.ProductDTO;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.List;
 //파일 안에 데이터가 없거나 형식이 잘못되었을 경우에 대한 에외처리를 진행해야한다.
 //이 부분에 대한 테스트도 생성해야한다.
 
-public class ConvenienceService {
+public class ProductService {
 
 
     //일단 모든 문장을 저장해서 불러오기
@@ -40,7 +39,7 @@ public class ConvenienceService {
     }
 
     //토큰으로 문장 나누기
-    private List<String[]> sliceLines(List<String> lines) {
+   public List<String[]> sliceLines(List<String> lines) {
         List<String[]> tokens = new ArrayList<>();
         for (String line : lines) {
             line = line.trim();
@@ -57,7 +56,7 @@ public class ConvenienceService {
         try {
             products = makeProductList(tokens, products);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+           throw new IllegalArgumentException(e.getMessage());
         }
         return products;
     }
