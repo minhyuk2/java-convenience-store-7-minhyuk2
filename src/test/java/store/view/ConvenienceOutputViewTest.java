@@ -3,20 +3,15 @@ package store.view;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import store.domain.FilePathDTO;
 import store.domain.Product;
 import store.domain.ProductDTO;
-import store.service.ConvenienceService;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ConvenienceOutputViewTest {
 
