@@ -13,7 +13,8 @@ public class Product {
         this.productQuantity = productQuantity;
         this.productPromotion = productPromotion;
         if (!productPromotion.equals("null")) {
-            productPromotionQuantity = productQuantity;
+            this.productPromotionQuantity = productQuantity;
+            this.productQuantity = 0;
         }
     }
 
@@ -37,10 +38,56 @@ public class Product {
     }
 
     public String getFormattedOutput(){
-        if(productPromotion == null){
-         return String.format("- " + productName + " " + formatPrice(productPrice) +"원 "+ productQuantity +"개");
+        if(productPromotion.equals("null")){
+            return String.format("- " + productName + " " + formatPrice(productPrice) +"원 "+ zeroQuantity(productQuantity));
         }
-        return String.format("- " + productName + " " + formatPrice(productPrice) +"원 "+ productQuantity +"개 " + productPromotion);
+        return String.format("- " + productName + " " + formatPrice(productPrice) +"원 "+ zeroQuantity(productPromotionQuantity) +" "+ productPromotion+"\n"+
+                "- " + productName + " " + formatPrice(productPrice) +"원 "+ zeroQuantity(productQuantity));
     }
 
+    private String zeroQuantity(int productQuantitys) {
+        if (productQuantitys == 0) {
+            return "재고 없음 ";
+        }
+        return productQuantitys + "개";
+    }
+
+
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void reduceQuantity(int orderQuantity, boolean isPromotionApplied) {
+        if (isPromotionApplied && productPromotionQuantity >= orderQuantity) {
+            productPromotionQuantity -= orderQuantity;
+        } else {
+            productQuantity -= orderQuantity;
+        }
+    }
+
+    public String getProductPromotion (){
+        return productPromotion;
+    }
+
+    public int getProductQuantity(){
+        return productQuantity;
+    }
+
+    public int getProductPromotionQuantity(){
+        return productPromotionQuantity;
+    }
+
+    public int getProductPrice(){
+        return productPrice;
+    }
+    public void restoreStock(int quantity) {
+        this.productQuantity += quantity;
+    }
+    public void reducePromotionQuantity(int promotionQuantity) {
+        this.productPromotionQuantity -= promotionQuantity;
+    }
+    public void restorePromotionQuantity(int promotionQuantity) {
+        this.productPromotionQuantity += promotionQuantity;
+    }
 }
