@@ -64,10 +64,29 @@ public class ProductService {
     //공백에 대한 예외처리 고려해야함
     public List<Product> makeProductList(List<String[]> tokens, List<Product> products) {
         for (String[] token : tokens) {
-            products.add(new Product(token[0], parseInteger(token[1]), parseInteger(token[2]), token[3]));
+            updateOrAddProduct(products,token);
         }
         return products;
     }
+    private void updateOrAddProduct( List<Product> products,String[] token) {
+        Product existingProduct = findProductByName(products, token[0]);
+        if (existingProduct != null) {
+            existingProduct.addProductQuantity(parseInteger(token[1]));
+            return;
+        }
+        products.add(new Product(token[0], parseInteger(token[1]), parseInteger(token[2]), token[3]));
+    }
+
+    //이미 존재하는게 있는 경우에는 한 개로 묶기
+    private Product findProductByName(List<Product> products, String name) {
+        for (Product product : products) {
+           if(product.equalName(name)){
+               return product;
+           }
+        }
+        return null; // 조건을 만족하는 제품이 없는 경우
+    }
+
 
     public int parseInteger(String token) {
         try {
