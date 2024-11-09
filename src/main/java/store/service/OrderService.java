@@ -1,6 +1,9 @@
 package store.service;
 
 import store.domain.*;
+import store.domain.dto.InputDTO;
+import store.domain.dto.OrderDTO;
+import store.domain.dto.ProductDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ public class OrderService {
     //-로 구분
     //controller에서 try-catch로 다시 입력받게끔 해야한다.
     //이걸 controller에서 try-catch로 무한 입력받게끔 설정해야한다.
-    public OrderDTO getOrderFromInput(InputDTO inputDTO,ProductDTO productDTO){
+    public OrderDTO getOrderFromInput(InputDTO inputDTO, ProductDTO productDTO){
         String[] tokens = splitInputWithComma(inputDTO);
         List<String> findObjs = splitTokenWithPar(tokens);
        return new OrderDTO( splitPart(findObjs,productDTO));
@@ -53,7 +56,7 @@ public class OrderService {
     //존재하는 물건인지 확인하기
     //물건 확인해서 orders에 넣어주기
     //productDTO에 있는 물건인지 확인하는 로직 작성해야함
-    private void certifyOrderName(ProductDTO productDTO, String orderObject) {
+    public void certifyOrderName(ProductDTO productDTO, String orderObject) {
         if (productDTO.getProducts().stream().noneMatch(product -> product.equalName(orderObject))) {
             throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다. 다시 입력해 주세요.");
         }
@@ -62,14 +65,14 @@ public class OrderService {
     //개수가 맞는지 확인하고, 부족한지도 확인해야함
     //할인 받을 것인지도 물어보는 로직이 필요함
     //개수가 맞는지 확인
-    private void certifyOrderQuantity(ProductDTO productDTO, int orderQuantity) {
+    public void certifyOrderQuantity(ProductDTO productDTO, int orderQuantity) {
         if(productDTO.getProducts().stream().noneMatch(product -> product.hasSufficientQuantity(orderQuantity))){
             throw new IllegalArgumentException("[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.");
         }
     }
 
     //parseInt할 때 바꾸기
-    private int parseOrderQuantity(String orderQuantity) {
+    public int parseOrderQuantity(String orderQuantity) {
         int orderQuantityCount;
         try{
              orderQuantityCount = Integer.parseInt(orderQuantity);
@@ -79,7 +82,7 @@ public class OrderService {
         return orderQuantityCount;
     }
 
-    private void certifyToken(String token){
+    public void certifyToken(String token){
         if(!token.startsWith("[")){
             throw new IllegalArgumentException("[ERROR] 올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
         }
@@ -88,11 +91,7 @@ public class OrderService {
         }
     }
 
-    private String extractContent(String token) {
+    public String extractContent(String token) {
         return token.substring(1, token.length() - 1);
     }
-
-
-
-
 }
