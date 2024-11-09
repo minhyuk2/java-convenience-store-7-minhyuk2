@@ -15,7 +15,6 @@ import java.util.List;
 
 public class ProductService {
 
-
     //일단 모든 문장을 저장해서 불러오기
     public void getLinesFromFile(String filePath, List<String> lines) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -53,12 +52,7 @@ public class ProductService {
     //불러온 문장에서 필요한 정보를 빼오기
     public List<Product> getDataFromList(List<String[]> tokens) {
         List<Product> products = new ArrayList<>();
-        try {
-            products = makeProductList(tokens, products);
-        } catch (Exception e) {
-           throw new IllegalArgumentException(e.getMessage());
-        }
-        return products;
+        return  makeProductList(tokens, products);
     }
 
     //공백에 대한 예외처리 고려해야함
@@ -86,7 +80,6 @@ public class ProductService {
         }
         return null; // 조건을 만족하는 제품이 없는 경우
     }
-
 
     public int parseInteger(String token) {
         try {
