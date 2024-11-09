@@ -1,8 +1,8 @@
 package store.service;
 
-import store.domain.FilePathDTO;
+import store.domain.dto.FilePathDTO;
 import store.domain.Product;
-import store.domain.ProductDTO;
+import store.domain.dto.ProductDTO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

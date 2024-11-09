@@ -4,7 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import store.domain.Product;
-import store.domain.ProductDTO;
+import store.domain.dto.ProductDTO;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

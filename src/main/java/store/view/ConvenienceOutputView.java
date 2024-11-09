@@ -1,7 +1,7 @@
 package store.view;
 
 import store.domain.Product;
-import store.domain.ProductDTO;
+import store.domain.dto.ProductDTO;
 
 import java.util.List;
 

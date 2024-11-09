@@ -1,7 +1,6 @@
 package store.view;
 
-import store.domain.InputDTO;
-import store.domain.OrderDTO;
+import store.domain.dto.InputDTO;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 

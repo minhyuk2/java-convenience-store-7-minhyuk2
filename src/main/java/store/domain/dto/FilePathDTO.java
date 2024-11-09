@@ -1,4 +1,4 @@
-package store.domain;
+package store.domain.dto;
 
 public class FilePathDTO {
     private final String fileName;
