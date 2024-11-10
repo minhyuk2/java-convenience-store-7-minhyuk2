@@ -9,26 +9,27 @@
 
 # 제출 전에 반드시 확인할 것
 
-1. [] 전체 테스트코드 작성
+1. [x] 전체 테스트코드 작성
 2. [] 단위 테스트코드 작성
 3. [] 예외처리 진행
 4. [] 함수 10줄 넘는지 확인
 ## 필요한 부분
 1. [] 예외처리
-2. [] 전체 테스트 작성
+2. [x] 전체 테스트 작성
 3. [] 단위 테스트 작성
-4. [] 없는 물건에 대해서는 감소되게끔
+4. [x] 없는 물건에 대해서는 감소되게끔
 5. [] 파일 입출력
-6. [] 프로모션 처리
-7. [] 멤버쉽 유무
-8. [] 추가 유무
-9. [] 마지막 영수증 처리
-10. [] 프로모션에서 상품을 적게 가져간 경우에 대한 처리
-11. [] 전체 물건들을 관리하게끔 사용하는 기능 -> 파일 입출력을 사용하면 파일의 내용을 변경?
-12. [] 할인 최대 금액만큼만 되게끔 설정
-13. [] null이 문자열로 출력되지 않게끔 설정
-14. [] 0개인 경우 0개가 아니라 재고 없음으로 출력
-15. [] md파일의 첫번째 문장을 어떻게 처리할건지에 대한 고민
+6. [x] 프로모션 처리
+7. [x] 멤버쉽 유무
+8. [x] 추가 유무
+9. [x] 마지막 영수증 처리
+10. [x] 프로모션에서 상품을 적게 가져간 경우에 대한 처리
+11. [x] 전체 물건들을 관리하게끔 사용하는 기능->객체로서 관리
+12. [x] 할인 최대 금액만큼만 되게끔 설정
+13. [x] null이 문자열로 출력되지 않게끔 설정
+14. [x] 0개인 경우 0개가 아니라 재고 없음으로 출력
+15. [x] md파일의 첫번째 문장을 어떻게 처리할건지에 대한 고민 -> 경로를 조건에서 주었기에 상대경로로 사
+16. [x] 프로모션 제품이 프로모션을 받지 않은 경우 멤버쉽이 가능하게끔 처리
 
 ## 생각해볼 사안
     프로모션을 구입하고, 2+1인데 마지막 남은 2개를 산 경우
@@ -62,6 +63,9 @@
 1. [x] "[" 로 시작했는데 "]" 로 닫히지 않은 경우
 2. [x] 중간에 "[]"가 들어온 경우
 3. [x] 개수를 -를 기준으로 자르기
+4. [x] 공백이나 잘못된 값이 들어온 경우 다시 입력받기
+5. [x] Y,N이 아닌 다른 값이 입력된 경우 예외처리
+6. [x] y,n,Y,N 다 가능하게끔 처리
 
 
 
@@ -379,3 +383,50 @@ N: 구매를 종료한다.
     사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
 ## 디렉토리 구조
+```angular2html
+.
+├── main
+│   ├── java
+│   │   └── store
+│   │       ├── Application.java
+│   │       ├── controller
+│   │       │   └── BuyController.java
+│   │       ├── domain
+│   │       │   ├── Order.java
+│   │       │   ├── Product.java
+│   │       │   ├── Promotion.java
+│   │       │   ├── Receipt.java
+│   │       │   └── dto
+│   │       │       ├── FilePathDTO.java
+│   │       │       ├── InputDTO.java
+│   │       │       ├── OrderDTO.java
+│   │       │       ├── ProductDTO.java
+│   │       │       └── PromotionDTO.java
+│   │       ├── service
+│   │       │   ├── BuyService.java
+│   │       │   ├── OrderService.java
+│   │       │   ├── ProductService.java
+│   │       │   └── PromotionService.java
+│   │       └── view
+│   │           ├── ConvenienceInputView.java
+│   │           └── ConvenienceOutputView.java
+│   └── resources
+│       ├── products.md
+│       └── promotions.md
+└── test
+    └── java
+        ├── resources
+        │   ├── products.md
+        │   └── promotions.md
+        └── store
+            ├── ApplicationTest.java
+            ├── service
+            │   ├── BuyServiceTest.java
+            │   ├── OrderServiceTest.java
+            │   ├── ProductServiceTest.java
+            │   └── PromotionServiceTest.java
+            └── view
+                └── ConvenienceOutputViewTest.java
+
+16 directories, 27 files
+```
