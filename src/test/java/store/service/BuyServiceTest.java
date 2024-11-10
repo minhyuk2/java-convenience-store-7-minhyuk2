@@ -26,14 +26,13 @@ class BuyServiceTest {
 
     @Test
     void 가능한_프로모션_찾는_테스트() {
-        Product product = new Product("Test Product", 1000, 5,"Promo1");
-        Promotion promotion = new Promotion("Promo1",2,1 ,LocalDate.of(2024,1,1),LocalDate.of(2024,12,31));
+        Product product = new Product("Test Product", 1000, 5, "Promo1");
+        Promotion promotion = new Promotion("Promo1", 2, 1, LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31));
         List<Promotion> promotions = List.of(promotion);
-
         Optional<Promotion> applicablePromotion = buyService.getApplicablePromotion(product, promotions);
-
         assertThat(applicablePromotion).isPresent();
         assertThat(applicablePromotion.get()).isEqualTo(promotion);
     }
+
 
 }

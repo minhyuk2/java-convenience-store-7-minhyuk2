@@ -19,12 +19,12 @@ public class BuyController {
 
     private final ConvenienceInputView convenienceInputView;
     private final ConvenienceOutputView convenienceOutputView;
-    private final OrderService orderService ;
-    private final ProductService productService ;
-    private final PromotionService promotionService ;
-    private final BuyService buyService ;
+    private final OrderService orderService;
+    private final ProductService productService;
+    private final PromotionService promotionService;
+    private final BuyService buyService;
 
-    public BuyController(ConvenienceInputView convenienceInputView, ConvenienceOutputView convenienceOutputView,OrderService orderService,ProductService productService,PromotionService promotionService,BuyService buyService) {
+    public BuyController(ConvenienceInputView convenienceInputView, ConvenienceOutputView convenienceOutputView, OrderService orderService, ProductService productService, PromotionService promotionService, BuyService buyService) {
         this.convenienceInputView = convenienceInputView;
         this.convenienceOutputView = convenienceOutputView;
         this.orderService = orderService;
@@ -51,7 +51,7 @@ public class BuyController {
         } while (!convenienceInputView.inputMoreProduct().getInput().equals("N"));
     }
 
-    public OrderDTO getValidOrderDTO(ProductDTO productDTO,OrderDTO orderDTO) {
+    public OrderDTO getValidOrderDTO(ProductDTO productDTO, OrderDTO orderDTO) {
         try {
             InputDTO inputDTO = getInputConvenienceInService(productDTO);
             orderDTO = orderService.getOrderFromInput(inputDTO, productDTO);
@@ -61,28 +61,27 @@ public class BuyController {
         return orderDTO;
     }
 
-    public OrderDTO whileGetValidOrder(ProductDTO productDTO){
+    public OrderDTO whileGetValidOrder(ProductDTO productDTO) {
         OrderDTO orderDTO = null;
         while (orderDTO == null) {
-            orderDTO = getValidOrderDTO(productDTO,orderDTO);
+            orderDTO = getValidOrderDTO(productDTO, orderDTO);
         }
         return orderDTO;
     }
 
-    public InputDTO getInputConvenienceInService(ProductDTO productDTO){
+    public InputDTO getInputConvenienceInService(ProductDTO productDTO) {
         convenienceOutputView.printNowProducts(productDTO);
         return convenienceInputView.inputProductAndQuantity();
     }
 
     public void catchBuyService(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
         try {
-            Receipt receipt =buyService.specifyPromotion(orderDTO, promotionDTO, productDTO);
+            Receipt receipt = buyService.specifyPromotion(orderDTO, promotionDTO, productDTO);
             convenienceOutputView.printReceipt(receipt);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
-
 
 
 }

@@ -34,7 +34,7 @@ public class ProductService {
         }
     }
 
-   public List<String[]> sliceLines(List<String> lines) {
+    public List<String[]> sliceLines(List<String> lines) {
         List<String[]> tokens = new ArrayList<>();
         for (String line : lines) {
             line = line.trim();
@@ -46,16 +46,17 @@ public class ProductService {
 
     public List<Product> getDataFromList(List<String[]> tokens) {
         List<Product> products = new ArrayList<>();
-        return  makeProductList(tokens, products);
+        return makeProductList(tokens, products);
     }
 
     public List<Product> makeProductList(List<String[]> tokens, List<Product> products) {
         for (String[] token : tokens) {
-            updateOrAddProduct(products,token);
+            updateOrAddProduct(products, token);
         }
         return products;
     }
-    private void updateOrAddProduct( List<Product> products,String[] token) {
+
+    private void updateOrAddProduct(List<Product> products, String[] token) {
         Product existingProduct = findProductByName(products, token[0]);
         if (existingProduct != null) {
             existingProduct.addProductQuantity(parseInteger(token[2]));
@@ -66,9 +67,9 @@ public class ProductService {
 
     private Product findProductByName(List<Product> products, String name) {
         for (Product product : products) {
-           if(product.equalName(name)){
-               return product;
-           }
+            if (product.equalName(name)) {
+                return product;
+            }
         }
         return null;
     }

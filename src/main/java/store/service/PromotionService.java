@@ -18,7 +18,7 @@ public class PromotionService {
         this.productService = productService;
     }
 
-    public PromotionDTO getDataToPromotionDTO(FilePathDTO filePathDTO){
+    public PromotionDTO getDataToPromotionDTO(FilePathDTO filePathDTO) {
         List<String> lines = new ArrayList<>();
         productService.getLinesFromFile(filePathDTO.getFileName(), lines);
         return new PromotionDTO(getDataFromList(productService.sliceLines(lines)));
@@ -42,7 +42,7 @@ public class PromotionService {
     }
 
     public Promotion makePromotion(String[] token) {
-        return new Promotion(token[0],parseInteger(token[1]),parseInteger(token[2]),parseDate(token[3]),parseDate(token[4]));
+        return new Promotion(token[0], parseInteger(token[1]), parseInteger(token[2]), parseDate(token[3]), parseDate(token[4]));
     }
 
     private int parseInteger(String token) {
@@ -54,9 +54,9 @@ public class PromotionService {
     }
 
     private LocalDate parseDate(String token) {
-        try{
+        try {
             return LocalDate.parse(token);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException("[ERROR] 날짜 형식으로 변환할 수 없습니다.");
         }
     }
