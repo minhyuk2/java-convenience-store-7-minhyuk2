@@ -1,6 +1,9 @@
 package store.controller;
 
 import store.domain.Order;
+import store.domain.Product;
+import store.domain.Promotion;
+import store.domain.Receipt;
 import store.domain.dto.*;
 import store.service.BuyService;
 import store.service.OrderService;
@@ -10,6 +13,7 @@ import store.view.ConvenienceInputView;
 import store.view.ConvenienceOutputView;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BuyController {
 
@@ -72,10 +76,13 @@ public class BuyController {
 
     public void catchBuyService(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
         try {
-            buyService.specifyPromotion(orderDTO, promotionDTO, productDTO);
+            Receipt receipt =buyService.specifyPromotion(orderDTO, promotionDTO, productDTO);
+            convenienceOutputView.printReceipt(receipt);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
+
+
 
 }

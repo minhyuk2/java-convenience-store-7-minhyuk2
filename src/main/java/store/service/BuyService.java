@@ -22,12 +22,12 @@ public class BuyService {
 
 
     //이게 처음 시작하는 메소드
-    public void specifyPromotion(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
+    public Receipt specifyPromotion(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
         Receipt receipt = new Receipt();
         orderDTO.getOrders().forEach(order -> processOrder(order, productDTO, promotionDTO.getPromotions(),receipt));
         applyMembershipDiscountIfRequested(receipt);
         receipt.calculateFinalAmount();
-        outputView.printReceipt(receipt);
+        return receipt;
     }
 
     public Optional<Promotion> getApplicablePromotion(Product product, List<Promotion> promotions) {
@@ -169,7 +169,6 @@ public class BuyService {
         }
     }
 
-    //이 부분을 어떻게 controller로 뺄 수 있을까 고민
     public boolean buyNoPromotion(Product product, int nonPromoTotalUnits, int nonPromoUnitsFromPromoStock,int nonPromoUnitsFromNormalStock,Receipt receipt,Promotion promotion,AtomicInteger freeUnits,int applicablePromoSets) {
         outputView.printNoPromotion(product, nonPromoTotalUnits);
         if (inputView.inputPromotion().getInput().equalsIgnoreCase("N")) {
