@@ -36,4 +36,6 @@ class ConvenienceOutputViewTest {
         convenienceOutputView.printNowProducts(productDTO);
         assertThat(outputStream.toString()).isEqualTo("- 가방 1,000원 3개\n- 사탕 500원 2개 추천행사\n");
     }
+
+
 }
