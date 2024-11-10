@@ -74,12 +74,12 @@ public class Receipt {
         return promotionDiscounts;
     }
 
-    public void printPurchasedItems() {
-        purchasedItems.forEach(System.out::println);
+    public List<String> getPurchasedItems() {
+        return purchasedItems;
     }
 
-    public void printFreeItems() {
-        freeItems.forEach(System.out::println);
+    public List<String> getFreeItems(){
+        return freeItems;
     }
 
 }

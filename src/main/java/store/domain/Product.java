@@ -34,7 +34,7 @@ public class Product {
         return productName.equals(objName);
     }
     public boolean hasSufficientQuantity(int orderQuantity) {
-        return productQuantity >= orderQuantity;
+        return productQuantity+productPromotionQuantity >= orderQuantity;
     }
 
     public String getFormattedOutput(){

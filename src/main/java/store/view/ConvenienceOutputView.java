@@ -31,14 +31,14 @@ public class ConvenienceOutputView {
         System.out.println("==============W 편의점================");
         printItems(receipt);
         System.out.println("=============증      정===============");
-        receipt.printFreeItems();
+        receipt.getFreeItems().forEach(System.out::println);
         System.out.println("====================================");
         printMoney(receipt);
     }
 
     private void printItems(Receipt receipt) {
         System.out.printf("%-19s%-9s%-8s\n", "상품명", "수량", "금액");
-        receipt.printPurchasedItems();
+        receipt.getPurchasedItems().forEach(System.out::println);
     }
 
     private void printMoney(Receipt receipt) {
