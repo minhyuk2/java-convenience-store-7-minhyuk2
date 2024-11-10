@@ -65,7 +65,7 @@ public class ProductService {
     private void updateOrAddProduct( List<Product> products,String[] token) {
         Product existingProduct = findProductByName(products, token[0]);
         if (existingProduct != null) {
-            existingProduct.addProductQuantity(parseInteger(token[1]));
+            existingProduct.addProductQuantity(parseInteger(token[2]));
             return;
         }
         products.add(new Product(token[0], parseInteger(token[1]), parseInteger(token[2]), token[3]));

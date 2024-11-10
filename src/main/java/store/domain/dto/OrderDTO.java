@@ -5,13 +5,13 @@ import store.domain.Order;
 import java.util.List;
 
 public class OrderDTO {
-    private List<Order> orderList;
+    private List<Order> orders;
 
     public OrderDTO(List<Order> orderList) {
-        this.orderList = orderList;
+        this.orders = orderList;
     }
     //여기서 최대한 처리할 수 있도록 로직을 구성해야함
-    public List<Order> getOrderList() {
-        return orderList;
+    public List<Order> getOrders() {
+        return orders;
     }
 }

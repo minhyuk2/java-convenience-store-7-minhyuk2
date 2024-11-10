@@ -61,9 +61,9 @@ public class Product {
     public void reduceQuantity(int orderQuantity, boolean isPromotionApplied) {
         if (isPromotionApplied && productPromotionQuantity >= orderQuantity) {
             productPromotionQuantity -= orderQuantity;
-        } else {
-            productQuantity -= orderQuantity;
+            return;
         }
+        productQuantity -= orderQuantity;
     }
 
     public String getProductPromotion (){
@@ -83,9 +83,6 @@ public class Product {
     }
     public void restoreStock(int quantity) {
         this.productQuantity += quantity;
-    }
-    public void reducePromotionQuantity(int promotionQuantity) {
-        this.productPromotionQuantity -= promotionQuantity;
     }
     public void restorePromotionQuantity(int promotionQuantity) {
         this.productPromotionQuantity += promotionQuantity;

@@ -15,6 +15,17 @@ public class OrderService {
     //-로 구분
     //controller에서 try-catch로 다시 입력받게끔 해야한다.
     //이걸 controller에서 try-catch로 무한 입력받게끔 설정해야한다.
+    public OrderDTO catchErrorOrder( InputDTO inputDTO,ProductDTO productDTO) {
+        OrderDTO orderDTO = new OrderDTO(new ArrayList<>());
+        try{
+            getOrderFromInput(inputDTO,productDTO);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return orderDTO;
+    }
+
     public OrderDTO getOrderFromInput(InputDTO inputDTO, ProductDTO productDTO){
         String[] tokens = splitInputWithComma(inputDTO);
         List<String> findObjs = splitTokenWithPar(tokens);

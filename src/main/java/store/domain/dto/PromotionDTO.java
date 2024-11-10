@@ -11,4 +11,7 @@ public class PromotionDTO {
         this.promotions = promotions;
     }
 
+    public List<Promotion> getPromotions() {
+        return promotions;
+    }
 }
