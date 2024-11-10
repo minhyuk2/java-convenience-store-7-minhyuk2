@@ -54,7 +54,7 @@ public class BuyService {
     }
 
 
-    private void handleNoPromotion(Product product, Order order,Receipt receipt) {
+    public void handleNoPromotion(Product product, Order order,Receipt receipt) {
         if (!product.hasSufficientQuantity(order.getQuantity()))
             throw new IllegalArgumentException("[ERROR] 재고 수량을 초과하여 구매할 수 없습니다.");
         product.reduceQuantity(order.getQuantity(), false);
@@ -100,16 +100,15 @@ public class BuyService {
 
 
     public void endTotal(Receipt receipt,Product product,int applicablePromoSets, Promotion promotion,int nonPromoUnitsFromPromoStock,int nonPromoUnitsFromNormalStock,AtomicInteger freeUnits){
-        //영수증에 추가
         writeReceipt(receipt,product,applicablePromoSets * promotion.getBuy(),nonPromoUnitsFromPromoStock,nonPromoUnitsFromNormalStock,freeUnits.get());
-        //공짜 물건 추가
         addFreeItem(product,freeUnits.get(),receipt);
+        if(freeUnits.get() == 0){
+            receipt.addPromotionAmount(-(nonPromoUnitsFromPromoStock*product.getProductPrice()));
+        }
     }
 
     public void endTotalNoPro(Receipt receipt,Product product,int applicablePromoSets, Promotion promotion,int nonPromoUnitsFromPromoStock,int nonPromoUnitsFromNormalStock,AtomicInteger freeUnits){
-        //영수증에 추가
         writeReceipt(receipt,product,applicablePromoSets * promotion.getBuy(),0,nonPromoUnitsFromNormalStock,freeUnits.get());
-        //공짜 물건 추가
         addFreeItem(product,freeUnits.get(),receipt);
         receipt.addPromotionAmount(-(nonPromoUnitsFromPromoStock*product.getProductPrice()));
     }
@@ -183,7 +182,7 @@ public class BuyService {
 
     public boolean assignBuyNoPromotion(Product product, int nonPromoUnitsFromPromoStock,int nonPromoUnitsFromNormalStock,boolean comeGetPromotion,Receipt receipt,Promotion promotion,AtomicInteger freeUnits,int applicablePromoSets) {
         int nonPromoTotalUnits = nonPromoUnitsFromPromoStock + nonPromoUnitsFromNormalStock;
-        if (nonPromoTotalUnits > 0 && !comeGetPromotion) {
+        if (nonPromoTotalUnits > 0 && !comeGetPromotion && freeUnits.get()>0) {
             return buyNoPromotion(product, nonPromoTotalUnits, nonPromoUnitsFromPromoStock, nonPromoUnitsFromNormalStock,receipt, promotion,freeUnits,applicablePromoSets);
         }
         return true;
