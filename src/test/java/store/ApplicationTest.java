@@ -61,6 +61,24 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 사용자_입력_상품_구매_및_할인_적용_테스트() {
+        assertSimpleTest(() -> {
+            run("[콜라-3],[에너지바-5]", "Y", "N");
+            assertThat(output().replaceAll("\\s", "")).contains("내실돈9,000");
+        });
+    }
+
+    @Test
+    void 프로모션_할인_안되는_테스트(){
+        assertSimpleTest(() -> {
+           run("[콜라-3]","Y","Y","[콜라-10]","Y","N","N");
+           assertThat(output().replaceAll("\\s","")).contains("행사할인-2,000");
+           assertThat(output().replaceAll("\\s","")).contains("내실돈8,000");
+
+        });
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
