@@ -31,10 +31,10 @@ class ConvenienceOutputViewTest {
 
     @Test
     void printNowProducts() {
-        List<Product> productList = List.of(new Product("가방", 1000, 3, null),new Product("사탕", 500, 2, "추천행사"));
+        List<Product> productList = List.of(new Product("가방", 1000, 3, "null"),new Product("사탕", 500, 2, "추천행사"));
         ProductDTO productDTO = new ProductDTO(productList);
         convenienceOutputView.printNowProducts(productDTO);
-        assertThat(outputStream.toString()).isEqualTo("- 가방 1,000원 3개\n- 사탕 500원 2개 추천행사\n");
+        assertThat(outputStream.toString()).isEqualTo("- 가방 1,000원 3개\n- 사탕 500원 2개 추천행사\n- 사탕 500원 재고 없음\n");
     }
 
 

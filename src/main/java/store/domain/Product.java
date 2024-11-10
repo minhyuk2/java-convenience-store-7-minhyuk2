@@ -47,7 +47,7 @@ public class Product {
 
     private String zeroQuantity(int productQuantitys) {
         if (productQuantitys == 0) {
-            return "재고 없음 ";
+            return "재고 없음";
         }
         return productQuantitys + "개";
     }
