@@ -21,19 +21,20 @@ public class BuyService {
     private final ConvenienceOutputView outputView = new ConvenienceOutputView();
 
 
-    public Optional<Promotion> getApplicablePromotion(Product product, List<Promotion> promotions) {
-        return promotions.stream()
-                .filter(promotion -> promotion.getName().equals(product.getProductPromotion()))
-                .filter(Promotion::getIsNowOk)
-                .findFirst();
-    }
-
+    //이게 처음 시작하는 메소드
     public void specifyPromotion(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
         Receipt receipt = new Receipt();
         orderDTO.getOrders().forEach(order -> processOrder(order, productDTO, promotionDTO.getPromotions(),receipt));
         applyMembershipDiscountIfRequested(receipt);
         receipt.calculateFinalAmount();
         outputView.printReceipt(receipt);
+    }
+
+    public Optional<Promotion> getApplicablePromotion(Product product, List<Promotion> promotions) {
+        return promotions.stream()
+                .filter(promotion -> promotion.getName().equals(product.getProductPromotion()))
+                .filter(Promotion::getIsNowOk)
+                .findFirst();
     }
 
     private void processOrder(Order order, ProductDTO productDTO, List<Promotion> promotions,Receipt receipt) {

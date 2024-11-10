@@ -11,7 +11,6 @@ import java.util.List;
 
 public class PromotionService {
 
-    //문장을 가져오는 부분은 ProductService의 것을 사용하면 된다.
 
     private final ProductService productService;
 
