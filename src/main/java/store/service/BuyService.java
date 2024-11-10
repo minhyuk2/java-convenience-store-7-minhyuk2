@@ -118,15 +118,20 @@ public class BuyService {
     public boolean morePromotions(int nonPromoUnitsFromPromoStock, Promotion promotion, Product product, int remainingPromoStock, int promotionUnit, AtomicInteger totalPromoStockUsed, AtomicInteger freeUnits){
         if((nonPromoUnitsFromPromoStock == promotion.getBuy())&&(remainingPromoStock >= promotion.getGet())&&(remainingPromoStock >= promotionUnit)){
             outputView.printPromotionOk(product,promotion.getGet());
-            if(inputView.inputPromotion().getInput().equalsIgnoreCase("Y")){
-                totalPromoStockUsed.set(totalPromoStockUsed.get()+promotion.getGet()) ;
-                freeUnits.set(freeUnits.get()+promotion.getGet());
-            }
-           return true;
+            return morePromotionsInput(totalPromoStockUsed,freeUnits,promotion);
         }
         return false;
     }
 
+
+    public boolean morePromotionsInput(AtomicInteger totalPromoStockUsed,AtomicInteger freeUnits,Promotion promotion){
+        if(inputView.inputPromotion().getInput().equalsIgnoreCase("Y")){
+            totalPromoStockUsed.set(totalPromoStockUsed.get()+promotion.getGet()) ;
+            freeUnits.set(freeUnits.get()+promotion.getGet());
+            return true;
+        }
+        return false;
+    }
 
     public void foundException(Order order, Product product){
         if(order.getQuantity() > product.getProductPromotionQuantity()+ product.getProductQuantity()){
