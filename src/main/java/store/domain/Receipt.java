@@ -49,13 +49,13 @@ public class Receipt {
     }
 
     public void addPurchasedItem(String productName, int quantity, int price) {
-        purchasedItems.add(String.format("%-20s%-9d%-8s", productName, quantity, String.format("%,d", quantity * price)));
+        purchasedItems.add(String.format("%-15s \t%-6d\t %-8s", productName, quantity, String.format(" %,d", quantity * price)));
         totalPurchaseAmount += quantity * price;
         totalQuantity += quantity;
     }
 
     public void addFreeItem(String productName, int quantity) {
-        freeItems.add(String.format("%-20s%-9d", productName, quantity));
+        freeItems.add(String.format("%-14s \t%-9d", productName, quantity));
     }
 
     public void addPromotionDiscount(int discount) {
