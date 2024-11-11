@@ -23,7 +23,6 @@ public class Order {
         this.quantity += quantity;
     }
 
-    //getter를 쓰기 대신에 여기서 최대한 처리할 수 있게끔 만들어야 한다.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
