@@ -30,7 +30,7 @@ class ConvenienceOutputViewTest {
     }
 
     @Test
-    void printNowProducts() {
+    void 현재_물건_출력_테스트() {
         List<Product> productList = List.of(new Product("가방", 1000, 3, "null"),new Product("사탕", 500, 2, "추천행사"));
         ProductDTO productDTO = new ProductDTO(productList);
         convenienceOutputView.printNowProducts(productDTO);

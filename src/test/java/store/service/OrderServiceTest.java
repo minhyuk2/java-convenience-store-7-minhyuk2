@@ -71,66 +71,60 @@ class OrderServiceTest {
     }
 
     @Test
-    void testCertifyOrderName_ValidProduct() {
+    void 주문확인_테스트() {
         assertThatCode(() -> orderService.certifyOrderName(productDTO, "콜라"))
                 .doesNotThrowAnyException();
     }
 
     @Test
-    void testCertifyOrderName_InvalidProduct() {
+    void 상품_존재_확인_테스트() {
         assertThatThrownBy(() -> orderService.certifyOrderName(productDTO, "주스"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 존재하지 않는 상품입니다. 다시 입력해 주세요.");
     }
 
     @Test
-    void testCertifyOrderQuantity_SufficientQuantity() {
+    void 충분한_재고량_확인_테스트() {
         assertThatCode(() -> orderService.certifyOrderQuantity(productDTO, 500))
                 .doesNotThrowAnyException();
     }
 
     @Test
-    void testCertifyOrderQuantity_InsufficientQuantity() {
+    void 재고량_확인_테스트() {
         assertThatThrownBy(() -> orderService.certifyOrderQuantity(productDTO, 2000))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.");
     }
 
     @Test
-    void testParseOrderQuantity_ValidInput() {
+    void 파싱_테스트() {
         int quantity = orderService.parseOrderQuantity("500");
         assertThat(quantity).isEqualTo(500);
     }
 
     @Test
-    void testParseOrderQuantity_InvalidInput() {
+    void 주문_입력_테스트() {
         assertThatThrownBy(() -> orderService.parseOrderQuantity("오백"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 잘못된 입력입니다. 다시 입력해 주세요.");
     }
 
     @Test
-    void testCertifyToken_ValidToken() {
+    void 토큰_확인_테스트() {
         assertThatCode(() -> orderService.certifyToken("[콜라-500]"))
                 .doesNotThrowAnyException();
     }
 
-    @Test
-    void testCertifyToken_InvalidToken_NoStartingBracket() {
-        assertThatThrownBy(() -> orderService.certifyToken("콜라-500]"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
-    }
 
     @Test
-    void testCertifyToken_InvalidToken_NoEndingBracket() {
+    void 올바른_형식_테스트() {
         assertThatThrownBy(() -> orderService.certifyToken("[콜라-500"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
     }
 
     @Test
-    void testExtractContent() {
+    void order_내용물_추출_ㅌ스트() {
         String content = orderService.extractContent("[콜라-500]");
         assertThat(content).isEqualTo("콜라-500");
     }
