@@ -82,13 +82,11 @@ public class ProductService {
         }
     }
 
-    //여기서 발생되는 exception들 전부 처리하는 식으로 진행하는게 좋아보임
-    //뺴온 정보들 리턴하는 함수 만들기
-    //이게 모든 것을 만드는 함수다.
+
     public ProductDTO getProducts(FilePathDTO filePathDTO) {
         List<String> lines = new ArrayList<>();
         getLinesFromFile(filePathDTO.getFileName(), lines);
-        return new ProductDTO(getDataFromList(sliceLines(lines))); //이러면 에러를 처리하기 어렵기에 지울 생각해야한다.
+        return new ProductDTO(getDataFromList(sliceLines(lines)));
     }
 
 }
