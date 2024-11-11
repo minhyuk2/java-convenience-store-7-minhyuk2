@@ -420,6 +420,8 @@ N: 구매를 종료한다.
         │   └── promotions.md
         └── store
             ├── ApplicationTest.java
+            ├── controller
+            │   └── BuyControllerTest.java
             ├── service
             │   ├── BuyServiceTest.java
             │   ├── OrderServiceTest.java
@@ -428,5 +430,5 @@ N: 구매를 종료한다.
             └── view
                 └── ConvenienceOutputViewTest.java
 
-16 directories, 27 files
+17 directories, 28 files
 ```
