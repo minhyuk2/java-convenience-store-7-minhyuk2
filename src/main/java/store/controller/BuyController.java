@@ -85,7 +85,7 @@ public class BuyController {
     }
 
 
-    private Receipt processReceipt(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
+    public Receipt processReceipt(OrderDTO orderDTO, PromotionDTO promotionDTO, ProductDTO productDTO) {
         Receipt receipt = new Receipt();
         for (Order order : orderDTO.getOrders()) {
             processOrder(order, promotionDTO, productDTO, receipt);
@@ -120,13 +120,13 @@ public class BuyController {
         return new int[]{applicableSets, nonPromoUnits};
     }
 
-    private int calculateApplicablePromoSets(Order order, Product product, Promotion promotion) {
+    public int calculateApplicablePromoSets(Order order, Product product, Promotion promotion) {
         int promoStockSets = product.getProductPromotionQuantity() / (promotion.getBuy() + promotion.getGet());
         int orderSets = order.getQuantity() / (promotion.getBuy() + promotion.getGet());
         return Math.min(promoStockSets, orderSets);
     }
 
-    private int calculateNonPromoUnits(Order order, Product product, Promotion promotion, int applicableSets) {
+    public int calculateNonPromoUnits(Order order, Product product, Promotion promotion, int applicableSets) {
         int unitsAfterSets = order.getQuantity() - applicableSets * (promotion.getBuy() + promotion.getGet());
         int remainingPromoStock = product.getProductPromotionQuantity()-applicableSets * (promotion.getBuy() + promotion.getGet());
         return Math.min(unitsAfterSets, remainingPromoStock);
