@@ -49,7 +49,7 @@ public class Receipt {
     }
 
     public void addPurchasedItem(String productName, int quantity, int price) {
-        purchasedItems.add(String.format("%-20s%-8d%-8s", productName, quantity, String.format("%,d", quantity * price)));
+        purchasedItems.add(String.format("%-20s%-9d%-8s", productName, quantity, String.format("%,d", quantity * price)));
         totalPurchaseAmount += quantity * price;
         totalQuantity += quantity;
     }
