@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class BuyServiceTest {
 
@@ -32,6 +33,24 @@ class BuyServiceTest {
         Optional<Promotion> applicablePromotion = buyService.getApplicablePromotion(product, promotions);
         assertThat(applicablePromotion).isPresent();
         assertThat(applicablePromotion.get()).isEqualTo(promotion);
+    }
+
+    @Test
+    void 초과주문_판단_테스트(){
+        Product product = new Product("제로콜라", 1000, 5, "Promo1");
+        Order order = new Order("제로콜라",10);
+        Receipt receipt = new Receipt();
+        assertThatThrownBy(() -> buyService.handleNoPromotion(product,order,receipt))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.");
+    }
+
+    @Test
+    void 멤버쉽_할인적용_테스트(){
+        Receipt receipt = new Receipt();
+        receipt.addPurchasedItem("제로콜라",3,2000);
+        buyService.applyMembershipDiscount(receipt);
+        assertThat(receipt.getMembershipDiscount()).isEqualTo(1800);
     }
 
 
